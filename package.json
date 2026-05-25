@@ -1,0 +1,27 @@
+{
+  "name": "youtube_clone",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "homepage": "https://github.com/SabinGhimireNP/BackEnd_Learning#readme",
+  "bugs": {
+    "url": "https://github.com/SabinGhimireNP/BackEnd_Learning/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SabinGhimireNP/BackEnd_Learning.git"
+  },
+  "license": "ISC",
+  "author": "SabinGhimireNP",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
