@@ -110,11 +110,9 @@ const loginUser = asyncHandler(async (req, res) => {
     const UserExist =await  User.findOne({
         $or: [{ email }, {username}]
     })
-
     if(!UserExist) {throw new ApiError(404, "User not found")}
 
     const isPasswordValid = await UserExist.get.comparePassword(password)
-
     if(!isPasswordValid) {throw new ApiError(401, "Invalid user credentials")}
 
     generateAccessAndRefreshToken(user._id)
@@ -141,7 +139,24 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logOutUser = asyncHandler(async(req, res)=>{
-    User.findById
+    await User.findByIdAndUpdate(req.user._id,{
+        $set: {
+            refreshToken: undefined
+        }
+    },{
+        new: true
+    })
+    
+    const options = {
+    httpsOnly : true,
+    secure: true,
+    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken",options)
+    .clearCookie("refresgToken",options)
+    .json(new ApiResponse(200, {}, "user Logged Out"))
 })
 
-export {registerUser, loginUser}
+export {registerUser, loginUser, logOutUser}
