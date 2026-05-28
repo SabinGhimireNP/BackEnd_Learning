@@ -51,7 +51,7 @@ userSchema.pre("save", async function(next){
     if(this.isModified('password')){
         this.password = await bcrypt.hash(this.password, 10)
     }
-    next();
+    next;
 });
 
 userSchema.methods.comparePassword = async function(candidatePassword){
@@ -85,4 +85,4 @@ userSchema.methods.generateRefreshToken = function(){
     );
 }
 
-const User = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);
