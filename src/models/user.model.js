@@ -1,6 +1,8 @@
 import mongoose, {Schema} from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcrypt"
+import dotenv from "dotenv"
+dotenv.config()
 
 const userSchema = new Schema({
     watchHistory:[{
@@ -66,8 +68,7 @@ userSchema.methods.generateAccessToken = function(){
             username: this.username,
             fullName: this.fullName
         },
-        
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,    
 
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRES
@@ -81,10 +82,10 @@ userSchema.methods.generateRefreshToken = function(){
             _id: this._id,
         },
 
-        process.env.ACCESS_REFRESH_SECRET,
+        process.env.REFRESH_TOKEN_SECRET,
 
         {
-            expiresIn: process.env.ACCESS_REFRESH_EXPIRES
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRES
         }
     );
 }
